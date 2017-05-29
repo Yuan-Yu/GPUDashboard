@@ -1,0 +1,40 @@
+html
+  header
+    link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    link(rel="stylesheet" href="./index.css")
+  body
+    div.navbar
+      
+    div.main#monitor
+      monitorctn(v-bind:info="info" v-for="info in infos")
+
+
+  template#cardInfoContainer
+    .cardInfoContainer
+      .title {{info.server}}:{{info.index}}
+      .GPUPersent
+        .inerCircle1
+        .inerCircle2( v-bind:style="styleobj")
+        .inerCircleCover
+        .cover-text {{info.Utilization}}%
+      .GPUInfo
+        h3 {{info.Name}}
+        h3 
+          i.material-icons.h3(title="Power") &#xE3E7;
+          a {{info.Power}} W
+        h3
+          i.material-icons.h3(title="Temperature") &#xE80E;
+          a {{info.Temperature}} °C
+        h3
+          i.material-icons.h3(title="Fan Speed") &#xE332;
+          a {{info.Fan}} %
+      .currentUserInfo
+        .appdata
+          i.material-icons.h3(title="current users") &#xE7FD;
+          a {{info.Users}}
+        .appdata
+          i.material-icons.h3(title="Fan Speed") &#xE8B8;
+          div(v-bind:title="info.Processes") {{info.Processes}}
+  script(src='https://unpkg.com/axios/dist/axios.min.js')
+  script(src='https://unpkg.com/vue/dist/vue.js')
+  script(src='./index.js')
