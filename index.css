@@ -52,6 +52,7 @@ body {
   border-top-right-radius: 200px;
   background-color: #F5F5F5;
   transform: rotate(0deg);
+  transition: 1s;
   transform-origin: 50% 100%;
   z-index: 50; }
 
