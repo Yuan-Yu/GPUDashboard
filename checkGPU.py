@@ -40,7 +40,7 @@ while 1:
         uuidProcess = mergedDATA.groupby('uuid')
 
         process = uuidProcess['Process'].apply(lambda x: ','.join(list(set(x)))).to_dict().items()
-        user = uuidProcess['USER'].apply(lambda x: ','.join(list(set(x)))).to_dict().items()
+        user = uuidProcess['USER'].apply(lambda x: ','.join(list(set(x.astype(str))))).to_dict().items()
         GPUData = pd.merge(GPUData,pd.DataFrame(process,columns=['uuid','Processes']),on='uuid',how='left')
         GPUData = pd.merge(GPUData,pd.DataFrame(user,columns=['uuid','Users']),on='uuid',how='left')                             
         GPUData.drop(['uuid'],axis=1,inplace=True)
