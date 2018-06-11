@@ -123,6 +123,7 @@ a {
 .appdata {
   font-size: 1.1em;
   font-weight: bold;
+  height: 20px;
 }
 
 .appdata > i {
