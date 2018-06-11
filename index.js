@@ -1,11 +1,13 @@
 var config = {
-  apiKey: "AIzaSyBZZ_DWPh7fjkpdO7-bqvuoOTvRaEPPN3Q",
-  authDomain: "gpumonitor-d6f94.firebaseapp.com",
-  databaseURL: "https://gpumonitor-d6f94.firebaseio.com",
-  projectId: "gpumonitor-d6f94",
-  storageBucket: "gpumonitor-d6f94.appspot.com",
-  messagingSenderId: "1006877681656"
-};
+      apiKey: "XXXXXXXXXXXXXXXXXXXXXXXXXX",
+      authDomain: "XXXXX.firebaseapp.com",
+      databaseURL: "https://XXXXXXX.firebaseio.com",
+      projectId: "XXXXX",
+      storageBucket: "",
+      messagingSenderId: "XXXXX"
+    };
+    
+var levelColors = {'safe':'#8ac442','warning':'#f9bb0d','danger':'#fc1046'}
 
 Vue.component("monitorctn",{
   template:'#cardInfoContainer',
@@ -13,6 +15,28 @@ Vue.component("monitorctn",{
   computed: {
     styleobj: function() {
       return {transform: "rotate("+ this.info.Utilization * 1.8+"deg)"};
+    },
+    memusageStyle: function(){
+      var color = this.setColor(this.info.MemoryUsage);
+      return {width: 150*0.01*this.info.MemoryUsage+"px",backgroundColor:color};
+    },
+    freeMem: function(){
+      return "Free Memory: "+this.info.MemoryFree+" MB"
+    },utilizationStyle(){
+      var color = this.setColor(this.info.Utilization);
+      return {backgroundColor:color}
+    }
+  },methods:{
+    setColor(percent){
+      var color;
+      if(percent>=90){
+        color = levelColors['danger'];
+      }else if(percent>=80){
+        color = levelColors['warning'];
+      }else{
+        color = levelColors['safe'];
+      }
+      return color;
     }
   }
 });
@@ -22,7 +46,6 @@ var monitor = new Vue({
     infos:[]
   },mounted: function(){
     var vobj = this;
-
     var gpufire = firebase.initializeApp(config);
     var database = gpufire.database();
     var ref = database.ref('Servers');

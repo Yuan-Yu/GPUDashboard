@@ -1,7 +1,8 @@
-$navBgColor: #15B7B9
+$navBgColor: #109af7
 $ContainerBorder: #F5F5F5
 $cardInfoContainerheight: 200px
 $persentBGColor: #F5F5F5
+$cardInfoContainerWidth: 415px
 body
   font-family: Verdana
 .navbar
@@ -16,7 +17,7 @@ body
   display: inline-block
 .cardInfoContainer
   position: relative
-  width: 415px
+  width: $cardInfoContainerWidth
   float: left
   display: inline-block
   height: $cardInfoContainerheight
@@ -27,6 +28,7 @@ body
 $ratio: 1
 $circl-radius: $cardInfoContainerheight * $ratio
 $usedColor: #10DDC2
+$usedColor: #007cdb
 .containerleft
   width: $circl-radius +8px
 .GPUPersent
@@ -53,7 +55,7 @@ $usedColor: #10DDC2
   border-top-right-radius: $circl-radius
   background-color: $persentBGColor
   transform: rotate(0deg)
-  transition: 1s;
+  transition: 1s
   transform-origin: 50% 100%
   z-index: 50
 $iner-ratio: 0.7
@@ -94,16 +96,47 @@ div.inerCircleCover
 h3
   margin-top: 6px
   font-size: 1.0em
-i.h3 
-  font-size: 1.1em
-a
-  margin-left: 8px
+i.label 
+  font-size: 20px
+  vertical-align: middle
 .appdata
   font-size: 1.1em
   font-weight: bold
+  line-height: 20px
+  height: 20px
+  
 .appdata > i
   float: left
-  font-size: 1.1em
+  line-height: 20px
+  font-size: 16px
 .appdata  > div
   width: 320px
   float: left
+.membar-container
+  position: relative
+.value-containe
+  display: inline-block
+  vertical-align: middle
+.membar
+  height: 18px
+  width: 150px
+  border-radius: 6px
+  background-color: #ef7b7b
+  transition: width 0.5s
+.info-container
+  line-height: 28px
+.mem-val
+  position: absolute
+  top: 0
+  height: 18px
+  width: 150px
+  line-height: 18px
+  text-align: center
+.gpu-name
+  font-weight: bold
+  margin-top: 10px
+  margin-bottom: 6px
+.app-value
+  line-height: 20px
+  display: inline-block
+  vertical-align: middle

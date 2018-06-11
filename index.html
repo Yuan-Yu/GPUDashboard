@@ -14,27 +14,41 @@
     <div class="cardInfoContainer">
       <div class="title">{{info.server}}:{{info.index}}</div>
       <div class="GPUPersent">
-        <div class="inerCircle1"></div>
+        <div class="inerCircle1" v-bind:style="utilizationStyle"></div>
         <div class="inerCircle2" v-bind:style="styleobj"></div>
         <div class="inerCircleCover"></div>
         <div class="cover-text">{{info.Utilization}}%</div>
       </div>
       <div class="GPUInfo">
-        <h3>{{info.Name}}</h3>
-        <h3> <i class="material-icons h3" title="Power">&#xE3E7;</i><a>{{info.Power}} W</a></h3>
-        <h3><i class="material-icons h3" title="Temperature">&#xE80E;</i><a>{{info.Temperature}} °C</a></h3>
-        <h3><i class="material-icons h3" title="Fan Speed">&#xE332;</i><a>{{info.Fan}} %</a></h3>
+        <div class="gpu-name">{{info.Name}}</div>
+        <div class="info-container"> <i class="material-icons label" title="Power">&#xE3E7;</i>
+          <div class="value-containe">{{info.Power}} W</div>
+        </div>
+        <div class="info-container"><i class="material-icons label" title="Temperature">&#xE80E;</i>
+          <div class="value-containe">{{info.Temperature}} °C</div>
+        </div>
+        <div class="info-container"><i class="material-icons label" title="Fan Speed">&#xE332;</i>
+          <div class="value-containe">{{info.Fan}} %    </div>
+        </div>
+        <div class="mem info-container"><i class="material-icons label" title="Memory Usage">memory</i>
+          <div class="membar-container value-containe" :title="freeMem"> 
+            <div class="membar" v-bind:style="memusageStyle"></div>
+            <div class="value-container mem-val">{{info.MemoryUsage}} %</div>
+          </div>
+        </div>
       </div>
       <div class="currentUserInfo">
-        <div class="appdata"><i class="material-icons h3" title="current users">&#xE7FD;</i><a>{{info.Users}}</a></div>
-        <div class="appdata"><i class="material-icons h3" title="Fan Speed">&#xE8B8;</i>
-          <div v-bind:title="info.Processes">{{info.Processes}}</div>
+        <div class="appdata"><i class="material-icons label" title="current users">&#xE7FD;</i>
+          <div class="app-value">{{info.Users}}</div>
+        </div>
+        <div class="appdata"><i class="material-icons label" title="processes">&#xE8B8;</i>
+          <div class="app-value" v-bind:title="info.Processes">{{info.Processes}}</div>
         </div>
       </div>
     </div>
   </template>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
   <script src="./index.js"></script>
 </html>

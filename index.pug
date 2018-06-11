@@ -13,28 +13,34 @@ html
     .cardInfoContainer
       .title {{info.server}}:{{info.index}}
       .GPUPersent
-        .inerCircle1
+        .inerCircle1( v-bind:style="utilizationStyle")
         .inerCircle2( v-bind:style="styleobj")
         .inerCircleCover
         .cover-text {{info.Utilization}}%
       .GPUInfo
-        h3 {{info.Name}}
-        h3 
-          i.material-icons.h3(title="Power") &#xE3E7;
-          a {{info.Power}} W
-        h3
-          i.material-icons.h3(title="Temperature") &#xE80E;
-          a {{info.Temperature}} °C
-        h3
-          i.material-icons.h3(title="Fan Speed") &#xE332;
-          a {{info.Fan}} %
+        .gpu-name {{info.Name}}
+        div.info-container 
+          i.material-icons.label(title="Power") &#xE3E7;
+          .value-containe {{info.Power}} W
+        div.info-container
+          i.material-icons.label(title="Temperature") &#xE80E;
+          .value-containe {{info.Temperature}} °C
+        div.info-container
+          i.material-icons.label(title="Fan Speed") &#xE332;
+          .value-containe {{info.Fan}} %    
+        div.mem.info-container
+          i.material-icons.label(title="Memory Usage") memory
+          .membar-container.value-containe(:title="freeMem")  
+            .membar(v-bind:style="memusageStyle")
+            .value-container.mem-val {{info.MemoryUsage}} %
+            //- {{info.MemoryUsage}} %
       .currentUserInfo
         .appdata
-          i.material-icons.h3(title="current users") &#xE7FD;
-          a {{info.Users}}
+          i.material-icons.label(title="current users") &#xE7FD;
+          .app-value {{info.Users}}
         .appdata
-          i.material-icons.h3(title="Fan Speed") &#xE8B8;
-          div(v-bind:title="info.Processes") {{info.Processes}}
+          i.material-icons.label(title="processes") &#xE8B8;
+          .app-value(v-bind:title="info.Processes") {{info.Processes}}
   script(src='https://unpkg.com/vue/dist/vue.js')
   script(src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js")
   script(src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js")
