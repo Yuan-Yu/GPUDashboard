@@ -7,7 +7,7 @@ import requests
 firebase_url ='https://gpumonitor-d6f94.firebaseio.com'
 ServerName = 'oldGPU'
 setInterval = 20
-
+session = requests.Session()
 while 1:
     try:
         GPUInfoTEXT = sp.check_output('nvidia-smi  --format=csv,noheader --query-gpu=power.draw,utilization.gpu,fan.speed,temperature.gpu,name,index,uuid',shell=True)
@@ -45,7 +45,7 @@ while 1:
         GPUData = pd.merge(GPUData,pd.DataFrame(user,columns=['uuid','Users']),on='uuid',how='left')                             
         GPUData.drop(['uuid'],axis=1,inplace=True)
         GPUData.fillna('',inplace=True)  
-        result = requests.put('{firebase_url}/Servers/{ServerName}/GPU.json'.format(firebase_url=firebase_url,ServerName=ServerName),data=GPUData.T.to_json())
+        result = session.put('{firebase_url}/Servers/{ServerName}/GPU.json'.format(firebase_url=firebase_url,ServerName=ServerName),data=GPUData.T.to_json())
         time.sleep(setInterval)
     except KeyboardInterrupt:
         raise
