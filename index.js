@@ -1,4 +1,12 @@
-var data_url =  'https://gpumonitor-d6f94.firebaseio.com/Servers.json?print=pretty';
+var config = {
+  apiKey: "AIzaSyBZZ_DWPh7fjkpdO7-bqvuoOTvRaEPPN3Q",
+  authDomain: "gpumonitor-d6f94.firebaseapp.com",
+  databaseURL: "https://gpumonitor-d6f94.firebaseio.com",
+  projectId: "gpumonitor-d6f94",
+  storageBucket: "gpumonitor-d6f94.appspot.com",
+  messagingSenderId: "1006877681656"
+};
+
 Vue.component("monitorctn",{
   template:'#cardInfoContainer',
   props: ["info"],
@@ -11,16 +19,22 @@ Vue.component("monitorctn",{
 var monitor = new Vue({
   el: '#monitor',
   data: {
-    myfirst: { transform: 'rotate(10deg)'},
     infos:[]
   },mounted: function(){
     var vobj = this;
-    var loadDATA=function() {
-        axios.get(data_url).then(function (response){ 
-        var keys = Object.keys(response.data);
+
+    var gpufire = firebase.initializeApp(config);
+    var database = gpufire.database();
+    var ref = database.ref('Servers');
+    ref.on('value',(snapshot)=>{
+      vobj.infos = vobj.rearrageData(snapshot.val());
+    });
+  },methods:{
+    rearrageData(gpudata){
+        var keys = Object.keys(gpudata);
         var infos = [];
         for(keyindex in keys){
-          var server = response.data[keys[keyindex]].GPU;
+          var server = gpudata[keys[keyindex]].GPU;
           var GPUs = server.map(function(e,gpuindex){
             e.server = keys[keyindex];
             e.index = gpuindex;
@@ -28,10 +42,7 @@ var monitor = new Vue({
           });
           infos = infos.concat(GPUs);
         }
-        vobj.infos = infos;
-      });
+      return infos;
     }
-    loadDATA();
-    window.setInterval(loadDATA,5000);
   }
 })
