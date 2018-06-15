@@ -1,6 +1,7 @@
 import subprocess as sp
 import time,re
 import json
+import __future__
 import requests
 firebase_url ='your firebase URL'
 ServerName = 'ServerName'
@@ -29,7 +30,7 @@ def getGPUTasksInfo():
 def getPidsUserInfo(pids):
     try:
         psTEXT = sp.check_output(" ps -p {pids} -o pid,user:20".format(pids=str.join(',',pids)),shell=True).decode()
-        psPattern = re.compile('\n([\d]{1,})\s+([\w\d]{1,})')
+        psPattern = re.compile('\n\s*([\d]{1,})\s*([\w\d]{1,})')
         pid2user = dict(psPattern.findall(psTEXT))
     except sp.CalledProcessError as e:
         pid2user = {}
@@ -215,7 +216,18 @@ class GPUDashboard(object):
 gdb = GPUDashboard()
 session = requests.Session()
 while 1:
-    gdb.update()
-    gpuInfosJson = json.dumps(gdb.outputInfo())
-    result = session.patch('{firebase_url}/Servers/{ServerName}/GPU.json'.format(firebase_url=firebase_url,ServerName=ServerName),data=gpuInfosJson)
-    time.sleep(setInterval)
+    try:
+        gdb.update()
+        gpuInfosJson = json.dumps(gdb.outputInfo())
+        result = session.patch('{firebase_url}/Servers/{ServerName}/GPU.json'.format(firebase_url=firebase_url,ServerName=ServerName),data=gpuInfosJson)
+        time.sleep(setInterval)
+    except requests.exceptions.ConnectionError:
+        time.sleep(100)
+        session = requests.Session()
+    except KeboardInterrupt:
+        raise
+    except Exception as e:
+        print(repr(e))
+        time.sleep(100)
+        
+        
