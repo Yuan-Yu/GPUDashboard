@@ -89,6 +89,19 @@ div.inerCircleCover {
   float: left;
   margin-left: 8px;
 }
+.GPUInfo .gpu-name {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+.GPUInfo .info-container {
+  line-height: 28px;
+}
+.GPUInfo .info-container div {
+  font-family: "Arial Black", Gadget, sans-serif;
+}
 
 .title {
   position: absolute;
@@ -105,11 +118,6 @@ div.inerCircleCover {
   font-size: 0.8em;
   font-weight: bold;
   margin: 8px 8px;
-}
-
-h3 {
-  margin-top: 6px;
-  font-size: 1em;
 }
 
 i.label {
@@ -152,10 +160,6 @@ i.label {
   transition: width 0.5s;
 }
 
-.info-container {
-  line-height: 28px;
-}
-
 .mem-val {
   position: absolute;
   top: 0;
@@ -163,12 +167,6 @@ i.label {
   width: 150px;
   line-height: 18px;
   text-align: center;
-}
-
-.gpu-name {
-  font-weight: bold;
-  margin-top: 10px;
-  margin-bottom: 6px;
 }
 
 .app-value {
