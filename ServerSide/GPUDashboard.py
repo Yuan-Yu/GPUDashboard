@@ -28,12 +28,14 @@ def getGPUTasksInfo():
     tasks = tasksAssignUser(tasks)
     return tasks
 def getPidsUserInfo(pids):
-    try:
-        psTEXT = sp.check_output(" ps -p {pids} -o pid,user:20".format(pids=str.join(',',pids)),shell=True).decode()
-        psPattern = re.compile('\n\s*([\d]{1,})\s*([\w\d]{1,})')
-        pid2user = dict(psPattern.findall(psTEXT))
-    except sp.CalledProcessError as e:
-        pid2user = {}
+    pid2user = {}
+    if pids:
+        try:
+            psTEXT = sp.check_output(" ps -p {pids} -o pid,user:20".format(pids=str.join(',',pids)),shell=True).decode()
+            psPattern = re.compile(r'\n\s*([\d]{1,})\s*([\w\d]{1,})')
+            pid2user = dict(psPattern.findall(psTEXT))
+        except sp.CalledProcessError as e:
+            print(repr(e))
     return pid2user
 def tasksAssignUser(tasks):
     pids = [task['Pid'] for task in tasks]
@@ -154,8 +156,11 @@ class GPUDashboard(object):
     def _assignTasks(self):
         tasks = getGPUTasksInfo()
         groupedTask = tasksGroupbyGPU(tasks)
-        for uuid in groupedTask:
-            self.gpus[uuid].updateTasks(groupedTask[uuid])
+        for uuid in self.gpus:
+            if uuid in groupedTask:
+                self.gpus[uuid].updateTasks(groupedTask[uuid])
+            else:
+                self.gpus[uuid]._clearTask()
     def _checkGPU(self,gpuInfos):
         flag = False
         if len(self.gpus) == len(gpuInfos):
@@ -224,7 +229,7 @@ while 1:
     except requests.exceptions.ConnectionError:
         time.sleep(100)
         session = requests.Session()
-    except KeboardInterrupt:
+    except KeyboardInterrupt:
         raise
     except Exception as e:
         print(repr(e))
