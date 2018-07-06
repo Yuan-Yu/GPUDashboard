@@ -3,9 +3,7 @@ import time,re
 import json
 import __future__
 import requests
-firebase_url ='your firebase URL'
-ServerName = 'ServerName'
-setInterval = 20
+
 
 def getGPUInfo():
     propertyNames = ['power.draw','utilization.gpu','fan.speed','temperature.gpu','name','index','memory.total','memory.used','uuid']
@@ -217,22 +215,4 @@ class GPUDashboard(object):
              'Power':gpu.powerDraw,'Processes':processes,'Temperature':gpu.temperature,
              'Users':users,'Utilization':gpu.utilization,'MemoryUsage':memoryUsage,'MemoryFree':memoryFree}    
         return out
-#-----------------------------------------------------------------
-gdb = GPUDashboard()
-session = requests.Session()
-while 1:
-    try:
-        gdb.update()
-        gpuInfosJson = json.dumps(gdb.outputInfo())
-        result = session.patch('{firebase_url}/Servers/{ServerName}/GPU.json'.format(firebase_url=firebase_url,ServerName=ServerName),data=gpuInfosJson)
-        time.sleep(setInterval)
-    except requests.exceptions.ConnectionError:
-        time.sleep(100)
-        session = requests.Session()
-    except KeyboardInterrupt:
-        raise
-    except Exception as e:
-        print(repr(e))
-        time.sleep(100)
-        
         
