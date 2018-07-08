@@ -1,6 +1,16 @@
 
 <html>
   <header>
+    <script>
+        var config = {
+            apiKey: "AIzaSyBTqPBghZkaW1QT4jSpP6jdaAMbtA3Glvs",
+            authDomain: "gputest-7bd53.firebaseapp.com",
+            databaseURL: "https://gputest-7bd53.firebaseio.com",
+            projectId: "gputest-7bd53",
+            storageBucket: "gputest-7bd53.appspot.com",
+            messagingSenderId: "562214626094"
+		};
+    </script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 		<style>
 		body {
@@ -225,19 +235,10 @@
       </div>
     </div>
   </template>
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
   <script>
-	  var config = {
-		apiKey: "AIzaSyBTqPBghZkaW1QT4jSpP6jdaAMbtA3Glvs",
-		authDomain: "gputest-7bd53.firebaseapp.com",
-		databaseURL: "https://gputest-7bd53.firebaseio.com",
-		projectId: "gputest-7bd53",
-		storageBucket: "gputest-7bd53.appspot.com",
-		messagingSenderId: "562214626094"
-		};
-		
 	var levelColors = {'safe':'#8ac442','warning':'#f9bb0d','danger':'#fc1046'}
 
 	Vue.component("monitorctn",{
