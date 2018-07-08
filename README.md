@@ -10,8 +10,12 @@ A simple dashboard for NVIDIA GPU
 - Linux-like OS  
 
 ## Setup  
-1. Create a Firebase **Realtime** database
-2. Set rule to 
+1. Create a [Firebase **Realtime** database](https://console.firebase.google.com/)  
+<img src="https://github.com/Yuan-Yu/GPUDashboard/blob/master/docs/crateDB.png?raw=true" height="150" >   
+
+2. Set rules to 
+<img src="https://github.com/Yuan-Yu/GPUDashboard/blob/master/docs/chageRule.png?raw=true" height="100" >    
+
 ```json 
 {
   "rules": {
@@ -20,7 +24,9 @@ A simple dashboard for NVIDIA GPU
   }
 }
 ```  
-3. Go to Project overview click "web application" and copy following part.  
+3. Go to Project overview click **Add Firebase to your web app** and copy following part.  
+<img src="https://github.com/Yuan-Yu/GPUDashboard/blob/master/docs/copyConfig.png?raw=true" height="150" >   
+
 ```javascript
   var config = {
     apiKey: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
@@ -31,11 +37,26 @@ A simple dashboard for NVIDIA GPU
     messagingSenderId: "XXXXXXXXXXX"
   };
 ```
-4. On server which is installed NVIDIA GPU
-```
+4. **On server** which is installed NVIDIA GPU
+```bash
 pip install GPUDashboard
 GPUDashboard -n your_server_name -i 20 -u your_databaseURL_URL > GPUDashboard.log # -i is the interval of GPU information updating.
 ```  
 Now, the server GPU information is post to the firebase.  
-5. Download [ViewStatus.html]('#') and replace the "config".  
-6. Double click the modified ViewStatus.html
+5. Download [ViewStatus.html]('https://raw.githubusercontent.com/Yuan-Yu/GPUDashboard/master/ViewStatus.html') and open with text editor then replace the "config".  
+```html
+<html>
+    <header>
+      <script>
+        var config = {
+            apiKey: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+            authDomain: "XXXXX.firebaseapp.com",
+            databaseURL: "https://XXXXXX.firebaseio.com",
+            projectId: "XXXXXXX",
+            storageBucket: "XXXXXXX.appspot.com",
+            messagingSenderId: "XXXXXXXXXXX"
+          };
+      </script>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+```  
+6. Double click the **modified** ViewStatus.html
