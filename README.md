@@ -37,10 +37,14 @@ A simple dashboard for NVIDIA GPU
     messagingSenderId: "XXXXXXXXXXX"
   };
 ```
-4. **On server** which is installed NVIDIA GPU
+4. **On servers** which are installed NVIDIA GPU
 ```bash
 pip install GPUDashboard
-GPUDashboard -n your_server_name -i 20 -u your_databaseURL_URL > GPUDashboard.log # -i is the interval of GPU information updating.
+GPUDashboard -n your_server_name -i 20 -u your_databaseURL > GPUDashboard.log 
+
+# your_server_name is the name you want to give your server e.g. MyFirstServer
+# -i is the interval of GPU information updating
+# your_databaseURL is the databaseURL obtained froom Firebase as shown above
 ```  
 Now, the server GPU information is post to the firebase.  
 5. Download [ViewStatus.html]('https://raw.githubusercontent.com/Yuan-Yu/GPUDashboard/master/ViewStatus.html') and open with text editor then replace the "config".  
