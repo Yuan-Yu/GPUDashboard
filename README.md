@@ -59,4 +59,4 @@ Now, the server GPU information is post to the firebase.
       </script>
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 ```  
-6. Double click the **modified** ViewStatus.html
+6. open the "**modified** ViewStatus.html" with browser.
