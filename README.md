@@ -36,8 +36,8 @@ A simple dashboard for NVIDIA GPU
     storageBucket: "XXXXXXX.appspot.com",
     messagingSenderId: "XXXXXXXXXXX"
   };
-```
-4.**On the servers** that have NVIDIA GPU(s) installed.  
+```  
+4. **On the servers** that have NVIDIA GPU(s) installed.  
 ```bash
 pip install GPUDashboard
 GPUDashboard -n your_server_name -i 20 -u your_databaseURL > GPUDashboard.log 
