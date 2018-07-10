@@ -48,7 +48,7 @@ GPUDashboard -n your_server_name -i 20 -u your_databaseURL > GPUDashboard.log
 ```  
 設定完後,伺服器已經開始傳送顯示卡資訊到資料庫中了. ***如果擁有多台伺服器時,僅需要確認每伺服器的名稱不同,方可使用同一個firebase網址**  
   
-5. 下載[ViewStatus.html]('https://raw.githubusercontent.com/Yuan-Yu/GPUDashboard/master/ViewStatus.html')以文字編輯器打開並修改config的部分.  
+5. 下載[ViewStatus.html](https://raw.githubusercontent.com/Yuan-Yu/GPUDashboard/master/ViewStatus.html)以文字編輯器打開並修改config的部分.  
 ```html
 <html>
     <header>
