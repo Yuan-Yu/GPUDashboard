@@ -17,15 +17,15 @@ from io import open
 # here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-# with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-#     long_description = f.read()
+with open(path.join('..', 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
 # Arguments marked as "Required" below must be included for upload to PyPI.
 # Fields marked as "Optional" may be commented out.
 
 setup(
     name='GPUDashboard',  # Required
-    version='0.2.0',  # Required
+    version='0.2.3',  # Required
 
     # This is a one-line description or tagline of what your project does. This
     # corresponds to the "Summary" metadata field:
@@ -40,8 +40,8 @@ setup(
     #
     # This field corresponds to the "Description" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#description-optional
-    # long_description=long_description,  # Optional
-    # long_description_content_type='text/markdown',  # Optional (see note above)
+    long_description=long_description,  # Optional
+    long_description_content_type='text/markdown',  # Optional (see note above)
 
     url='https://github.com/Yuan-Yu/GPUDashboard',  # Optional
 
