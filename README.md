@@ -48,7 +48,7 @@ GPUDashboard -n your_server_name -i 20 -u your_databaseURL > GPUDashboard.log
 ```  
 Now, the server GPU information is post to the firebase. ***If you have many servers, all of them can make use of the same database you created in Firebase. You only need to specify different names for "your_server_name" when you start the GPUDashboard in the command line on the different servers.**  
   
-5. Download [ViewStatus.html]('https://raw.githubusercontent.com/Yuan-Yu/GPUDashboard/master/ViewStatus.html') and open with text editor then replace the "config".  
+5. Download [ViewStatus.html](https://raw.githubusercontent.com/Yuan-Yu/GPUDashboard/master/ViewStatus.html) and open with text editor then replace the "config".  
 ```html
 <html>
     <header>
