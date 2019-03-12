@@ -3,16 +3,32 @@ import time,re
 import json
 import __future__
 import requests
+from datetime import datetime 
 
+nvmlClocksThrottleReasonUserDefinedClocks         = 0x0000000000000002
+nvmlClocksThrottleReasonGpuIdle                   = 0x0000000000000001
+nvmlClocksThrottleReasonSwPowerCap                = 0x0000000000000004
+nvmlClocksThrottleReasonHwSlowdown                = 0x0000000000000008
+nvmlClocksThrottleReasonUnknown                   = 0x8000000000000000
+nvmlClocksThrottleReasonSyncBoost                 = 0x0000000000000010
+nvmlClocksThrottleReasonSwThermalSlowdown         = 0x0000000000000020
+nvmlClocksThrottleReasonHwThermalSlowdown         = 0x0000000000000040
+nvmlClocksThrottleReasonHwPowerBrakeSlowdown      = 0x0000000000000080
+nvmlClocksThrottleReasonDisplayClockSetting       = 0x0000000000000100
 
+throttleByThermalOrPowerBrakeSlowdown = nvmlClocksThrottleReasonHwSlowdown | \
+                                         nvmlClocksThrottleReasonSwThermalSlowdown | \
+                                         nvmlClocksThrottleReasonHwPowerBrakeSlowdown| \
+                                         nvmlClocksThrottleReasonHwThermalSlowdown
 def getGPUInfo():
-    propertyNames = ['power.draw','utilization.gpu','fan.speed','temperature.gpu','name','index','memory.total','memory.used','uuid']
-    GPUInfoTEXT = sp.check_output('nvidia-smi  --format=csv,noheader --query-gpu=power.draw,utilization.gpu,fan.speed,temperature.gpu,name,index,memory.total,memory.used,uuid',shell=True).decode()
+    propertyNames = ['power.draw','utilization.gpu','fan.speed','temperature.gpu','name','index','memory.total','memory.used','throttled','uuid']
+    GPUInfoTEXT = sp.check_output('nvidia-smi  --format=csv,noheader --query-gpu=power.draw,utilization.gpu,fan.speed,temperature.gpu,name,index,memory.total,memory.used,clocks_throttle_reasons.active,uuid',shell=True).decode()
     GPUInfos = {}
     for info in GPUInfoTEXT.split('\n'):
         if info:
             info = map(lambda x: x.strip(),info.split(','))
             info = dict(zip(propertyNames,info))
+            info['throttled'] = True if int(info['throttled'],16) & throttleByThermalOrPowerBrakeSlowdown else False
             GPUInfos[info['uuid']] = info 
     return GPUInfos
 def getGPUTasksInfo():
@@ -65,6 +81,7 @@ class GPU(object):
         self.memoryTotal = info['memory.total']
         self.memoryUsed = info['memory.used']
         self.utilization = info['utilization.gpu']
+        self.throttled = info['throttled']
     def updateTasks(self,tasks):
         self._tasks = tasks
     def _clearTask(self):
@@ -205,6 +222,7 @@ class GPUDashboard(object):
         return changed
     def outputInfo(self):
         out = {}
+        logDateTime = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S GMT")
         for gpu in self.gpus.values():
             fanSpeed = 'N/A' if gpu.fanSpeed<0 else int(gpu.fanSpeed)
             processes= ','.join(gpu.processes) if gpu.processes else ''
@@ -212,7 +230,9 @@ class GPUDashboard(object):
             memoryUsage = int(gpu.memoryUsagePercentage)
             memoryFree = int(gpu.memoryFree)
             out[gpu.index] = {'Fan':fanSpeed,'GPUID':gpu.index,'Name':gpu.name,
-             'Power':gpu.powerDraw,'Processes':processes,'Temperature':gpu.temperature,
-             'Users':users,'Utilization':gpu.utilization,'MemoryUsage':memoryUsage,'MemoryFree':memoryFree}    
+              'Power':gpu.powerDraw,'Processes':processes,'Temperature':gpu.temperature,
+              'Users':users,'Utilization':gpu.utilization,'MemoryUsage':memoryUsage,
+              'MemoryFree':memoryFree,'throttled':gpu.throttled,
+              'logDateTime':logDateTime }
         return out
         
