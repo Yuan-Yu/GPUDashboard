@@ -11,8 +11,12 @@ html
 
   template#cardInfoContainer
     .cardInfoContainer
+      .disconect-cover( v-bind:class="{ hidden: !info.disconnect }")
+        i.material-icons.label(title="Disconnect") cloud_off
       .title {{info.server}}:{{info.index}}
       .GPUPersent
+        .lock-cover-container(v-bind:class="{ hidden: !info.throttled }")
+          i.material-icons.label(title="The clock speed of the GPU card could be throttled due to thermal or power limits.") lock
         .inerCircle1( v-bind:style="utilizationStyle")
         .inerCircle2( v-bind:style="styleobj")
         .inerCircleCover
@@ -41,7 +45,7 @@ html
         .appdata
           i.material-icons.label(title="processes") &#xE8B8;
           .app-value(v-bind:title="info.Processes") {{info.Processes}}
-  script(src='https://unpkg.com/vue/dist/vue.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js')
   script(src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js")
   script(src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js")
   script(src='./index.js')

@@ -8,6 +8,7 @@ var config = {
     };
     
 var levelColors = {'safe':'#8ac442','warning':'#f9bb0d','danger':'#fc1046'}
+var timeCutoff = 5 * 60 * 1000; // cutoff in millisecond
 
 Vue.component("monitorctn",{
   template:'#cardInfoContainer',
@@ -25,7 +26,7 @@ Vue.component("monitorctn",{
     },utilizationStyle(){
       var color = this.setColor(this.info.Utilization);
       return {backgroundColor:color}
-    }
+    },
   },methods:{
     setColor(percent){
       var color;
@@ -56,11 +57,14 @@ var monitor = new Vue({
     rearrageData(gpudata){
         var keys = Object.keys(gpudata);
         var infos = [];
+        var now = new Date(Date.now() - timeCutoff);
         for(keyindex in keys){
           var server = gpudata[keys[keyindex]].GPU;
           var GPUs = server.map(function(e,gpuindex){
+            var logDate = new Date(e.logDateTime);
             e.server = keys[keyindex];
             e.index = gpuindex;
+            e.disconnect =( Math.abs(now - logDate) > timeCutoff)? true:false;
             return e;
           });
           infos = infos.concat(GPUs);

@@ -27,6 +27,20 @@ body {
   margin: 10px;
 }
 
+.cardInfoContainer .disconect-cover {
+  width: 415px;
+  height: 200px;
+  position: absolute;
+  z-index: 105;
+  text-align: center;
+}
+
+.cardInfoContainer .disconect-cover i {
+  font-size: 120px;
+  line-height: 200px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
 .containerleft {
   width: 208px;
 }
@@ -38,6 +52,18 @@ body {
   margin-left: 8px;
   margin-top: 50px;
   overflow: hidden;
+}
+
+.GPUPersent div.lock-cover-container {
+  position: absolute;
+  bottom: 0;
+  height: 100px;
+  z-index: 104;
+}
+
+.GPUPersent div.lock-cover-container i {
+  font-size: 30px;
+  position: absolute;
 }
 
 .inerCircle1 {
@@ -89,6 +115,7 @@ div.inerCircleCover {
   float: left;
   margin-left: 8px;
 }
+
 .GPUInfo .gpu-name {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
@@ -96,9 +123,11 @@ div.inerCircleCover {
   margin-top: 10px;
   margin-bottom: 6px;
 }
+
 .GPUInfo .info-container {
   line-height: 28px;
 }
+
 .GPUInfo .info-container div {
   font-family: "Arial Black", Gadget, sans-serif;
 }
@@ -173,4 +202,8 @@ i.label {
   line-height: 20px;
   display: inline-block;
   vertical-align: middle;
+}
+
+.hidden {
+  display: none;
 }

@@ -25,6 +25,16 @@ body
   border-style: solid
   border-color: $ContainerBorder
   margin: 10px
+  .disconect-cover
+    width: $cardInfoContainerWidth
+    height: $cardInfoContainerheight
+    position: absolute
+    z-index: 105
+    text-align: center
+    i
+      font-size: $cardInfoContainerheight*0.6
+      line-height: $cardInfoContainerheight
+      color: rgba(0,0,0,0.6)
 $ratio: 1
 $circl-radius: $cardInfoContainerheight * $ratio
 $usedColor: #10DDC2
@@ -38,6 +48,16 @@ $usedColor: #007cdb
   margin-left: 8px
   margin-top: $cardInfoContainerheight * (1 - $ratio/2) /2
   overflow: hidden
+  div.lock-cover-container
+    position: absolute
+    bottom: 0
+    
+    height: $circl-radius * 0.5
+    // background-color: #FFFFFF
+    z-index: 104
+    i
+      font-size: 30px
+      position: absolute
 .inerCircle1
   width:  $circl-radius
   height: $circl-radius * 0.5
@@ -77,6 +97,7 @@ div.inerCircleCover
   position: absolute
   text-align: center
   bottom: 0
+
 .GPUInfo
   float: left
   margin-left: 8px
@@ -143,3 +164,6 @@ i.label
   line-height: 20px
   display: inline-block
   vertical-align: middle
+.hidden
+  display: none
+  
