@@ -25,7 +25,7 @@ with open(path.join('..', 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='GPUDashboard',  # Required
-    version='0.2.3',  # Required
+    version='0.2.4',  # Required
 
     # This is a one-line description or tagline of what your project does. This
     # corresponds to the "Summary" metadata field:
@@ -96,7 +96,7 @@ setup(
     #
     # For an analysis of "install_requires" vs pip's requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['requests','datetime','json'],  # Optional
+    install_requires=['requests','datetime'],  # Optional
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). Users will be able to install these using the "extras"
