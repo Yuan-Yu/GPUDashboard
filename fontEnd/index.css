@@ -57,12 +57,13 @@ body {
 .GPUPersent div.lock-cover-container {
   position: absolute;
   bottom: 0;
+  color: #f9bb0d;
   height: 100px;
   z-index: 104;
 }
 
 .GPUPersent div.lock-cover-container i {
-  font-size: 30px;
+  font-size: 32px;
   position: absolute;
 }
 
