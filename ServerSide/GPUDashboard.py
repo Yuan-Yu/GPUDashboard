@@ -229,7 +229,7 @@ class GPUDashboard(object):
             users= ','.join(gpu.users) if gpu.users else ''
             memoryUsage = int(gpu.memoryUsagePercentage)
             memoryFree = int(gpu.memoryFree)
-            out[gpu.index] = {'Fan':fanSpeed,'GPUID':gpu.index,'Name':gpu.name,
+            out[gpu.uuid[-17:]] = {'Fan':fanSpeed,'GPUID':gpu.index,'Name':gpu.name,
               'Power':gpu.powerDraw,'Processes':processes,'Temperature':gpu.temperature,
               'Users':users,'Utilization':gpu.utilization,'MemoryUsage':memoryUsage,
               'MemoryFree':memoryFree,'throttled':gpu.throttled,
