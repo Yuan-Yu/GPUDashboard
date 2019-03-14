@@ -57,13 +57,14 @@ var monitor = new Vue({
     rearrageData(gpudata){
         var keys = Object.keys(gpudata);
         var infos = [];
-        var now = new Date(Date.now() - timeCutoff);
+        var now = new Date(Date.now());
         for(keyindex in keys){
           var server = gpudata[keys[keyindex]].GPU;
-          var GPUs = server.map(function(e,gpuindex){
+          var GPUs = Object.values(server)
+          .sort((GPU1,GPU2)=>{return (GPU1.GPUID>GPU2.GPUID)?1:-1;})
+          .map(function(e){
             var logDate = new Date(e.logDateTime);
             e.server = keys[keyindex];
-            e.index = gpuindex;
             e.disconnect =( Math.abs(now - logDate) > timeCutoff)? true:false;
             return e;
           });
