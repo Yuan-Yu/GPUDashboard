@@ -1,7 +1,7 @@
 
 <html>
-  <header>
-    <script>
+	<header>
+		<script>
         var config = {
             apiKey: "AIzaSyBTqPBghZkaW1QT4jSpP6jdaAMbtA3Glvs",
             authDomain: "gputest-7bd53.firebaseapp.com",
@@ -10,126 +10,127 @@
             storageBucket: "gputest-7bd53.appspot.com",
             messagingSenderId: "562214626094"
 		};
-    </script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-<style>
-	body{font-family:Verdana}.navbar{width:100%;height:60px;background-color:#109af7}.main{width:calc(100% -$borderlen);border-width:0px;border-style:solid;display:inline-block}.cardInfoContainer{position:relative;width:415px;float:left;display:inline-block;height:200px;border-width:3px;border-style:solid;border-color:#f5f5f5;margin:10px}.cardInfoContainer .disconect-cover{width:415px;height:200px;position:absolute;z-index:105;text-align:center}.cardInfoContainer .disconect-cover i{font-size:120px;line-height:200px;color:rgba(0,0,0,0.6)}.containerleft{width:208px}.GPUPersent{position:relative;display:inline-block;float:left;margin-left:8px;margin-top:50px;overflow:hidden}.GPUPersent div.lock-cover-container{position:absolute;bottom:0;height:100px;z-index:104}.GPUPersent div.lock-cover-container i{font-size:30px;position:absolute}.inerCircle1{width:200px;height:100px;border-top-left-radius:200px;border-top-right-radius:200px;background-color:#007cdb;position:absolute;transform:rotate(0deg);transform-origin:50% 100%;bottom:0}.inerCircle2{width:200px;height:102px;border-top-left-radius:200px;border-top-right-radius:200px;background-color:#f5f5f5;transform:rotate(0deg);transition:1s;transform-origin:50% 100%;z-index:50}div.inerCircleCover{width:140px;height:70px;position:absolute;bottom:0;border-top-left-radius:140px;border-top-right-radius:140px;margin-left:30px;background-color:#FFFFFF;z-index:100}.cover-text{z-index:103;font-size:40px;width:200px;position:absolute;text-align:center;bottom:0}.GPUInfo{float:left;margin-left:8px}.GPUInfo .gpu-name{font-family:Arial, Helvetica, sans-serif;font-size:18px;font-weight:bold;margin-top:10px;margin-bottom:6px}.GPUInfo .info-container{line-height:28px}.GPUInfo .info-container div{font-family:"Arial Black", Gadget, sans-serif}.title{position:absolute;font-size:1.2em;font-weight:bold;margin:8px 8px}.currentUserInfo{position:absolute;width:360px;overflow:hidden;top:150px;font-size:0.8em;font-weight:bold;margin:8px 8px}i.label{font-size:20px;vertical-align:middle}.appdata{font-size:1.1em;font-weight:bold;line-height:20px;height:20px}.appdata>i{float:left;line-height:20px;font-size:16px}.appdata>div{width:320px;float:left}.membar-container{position:relative}.value-containe{display:inline-block;vertical-align:middle}.membar{height:18px;width:150px;border-radius:6px;background-color:#ef7b7b;transition:width 0.5s}.mem-val{position:absolute;top:0;height:18px;width:150px;line-height:18px;text-align:center}.app-value{line-height:20px;display:inline-block;vertical-align:middle}.hidden{display:none}
-</style>
-</header>
-<body>
-<div class="navbar"></div>
-<div class="main" id="monitor">
-	<monitorctn v-bind:info="info" v-for="info in infos"></monitorctn>
-</div>
-</body>
-<template id="cardInfoContainer">
-<div class="cardInfoContainer">
-	<div class="disconect-cover" v-bind:class="{ hidden: !info.disconnect }"><i class="material-icons label" title="Disconnect">cloud_off</i></div>
-	<div class="title">{{info.server}}:{{info.index}}</div>
-	<div class="GPUPersent">
-		<div class="lock-cover-container" v-bind:class="{ hidden: !info.throttled }"><i class="material-icons label" title="The clock speed of the GPU card could be throttled due to thermal or power limits.">lock</i></div>
-		<div class="inerCircle1" v-bind:style="utilizationStyle"></div>
-		<div class="inerCircle2" v-bind:style="styleobj"></div>
-		<div class="inerCircleCover"></div>
-		<div class="cover-text">{{info.Utilization}}%</div>
-	</div>
-	<div class="GPUInfo">
-		<div class="gpu-name">{{info.Name}}</div>
-		<div class="info-container"> <i class="material-icons label" title="Power">&#xE3E7;</i>
-			<div class="value-containe">{{info.Power}} W</div>
+		</script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+		<style>
+			body{font-family:Verdana}.navbar{width:100%;height:60px;background-color:#109af7}.main{width:calc(100% -$borderlen);border-width:0px;border-style:solid;display:inline-block}.cardInfoContainer{position:relative;width:415px;float:left;display:inline-block;height:200px;border-width:3px;border-style:solid;border-color:#f5f5f5;margin:10px}.cardInfoContainer .disconect-cover{width:415px;height:200px;position:absolute;z-index:105;text-align:center}.cardInfoContainer .disconect-cover i{font-size:120px;line-height:200px;color:rgba(0,0,0,0.6)}.containerleft{width:208px}.GPUPersent{position:relative;display:inline-block;float:left;margin-left:8px;margin-top:50px;overflow:hidden}.GPUPersent div.lock-cover-container{position:absolute;bottom:0;color:#f9bb0d;height:100px;z-index:104}.GPUPersent div.lock-cover-container i{font-size:32px;position:absolute}.inerCircle1{width:200px;height:100px;border-top-left-radius:200px;border-top-right-radius:200px;background-color:#007cdb;position:absolute;transform:rotate(0deg);transform-origin:50% 100%;bottom:0}.inerCircle2{width:200px;height:102px;border-top-left-radius:200px;border-top-right-radius:200px;background-color:#f5f5f5;transform:rotate(0deg);transition:1s;transform-origin:50% 100%;z-index:50}div.inerCircleCover{width:140px;height:70px;position:absolute;bottom:0;border-top-left-radius:140px;border-top-right-radius:140px;margin-left:30px;background-color:#FFFFFF;z-index:100}.cover-text{z-index:103;font-size:40px;width:200px;position:absolute;text-align:center;bottom:0}.GPUInfo{float:left;margin-left:8px}.GPUInfo .gpu-name{font-family:Arial, Helvetica, sans-serif;font-size:18px;font-weight:bold;margin-top:10px;margin-bottom:6px}.GPUInfo .info-container{line-height:28px}.GPUInfo .info-container div{font-family:"Arial Black", Gadget, sans-serif}.title{position:absolute;font-size:1.2em;font-weight:bold;margin:8px 8px}.currentUserInfo{position:absolute;width:360px;overflow:hidden;top:150px;font-size:0.8em;font-weight:bold;margin:8px 8px}i.label{font-size:20px;vertical-align:middle}.appdata{font-size:1.1em;font-weight:bold;line-height:20px;height:20px}.appdata>i{float:left;line-height:20px;font-size:16px}.appdata>div{width:320px;float:left}.membar-container{position:relative}.value-containe{display:inline-block;vertical-align:middle}.membar{height:18px;width:150px;border-radius:6px;background-color:#ef7b7b;transition:width 0.5s}.mem-val{position:absolute;top:0;height:18px;width:150px;line-height:18px;text-align:center}.app-value{line-height:20px;display:inline-block;vertical-align:middle}.hidden{display:none}
+		</style>
+	</header>
+	<body>
+		<div class="navbar"></div>
+		<div class="main" id="monitor">
+			<monitorctn v-bind:info="info" v-for="info in infos"></monitorctn>
 		</div>
-		<div class="info-container"><i class="material-icons label" title="Temperature">&#xE80E;</i>
-			<div class="value-containe">{{info.Temperature}} °C</div>
-		</div>
-		<div class="info-container"><i class="material-icons label" title="Fan Speed">&#xE332;</i>
-			<div class="value-containe">{{info.Fan}} %    </div>
-		</div>
-		<div class="mem info-container"><i class="material-icons label" title="Memory Usage">memory</i>
-			<div class="membar-container value-containe" :title="freeMem"> 
-				<div class="membar" v-bind:style="memusageStyle"></div>
-				<div class="value-container mem-val">{{info.MemoryUsage}} %</div>
+	</body>
+	<template id="cardInfoContainer">
+		<div class="cardInfoContainer">
+			<div class="disconect-cover" v-bind:class="{ hidden: !info.disconnect }"><i class="material-icons label" title="Disconnect">cloud_off</i></div>
+			<div class="title">{{info.server}}:{{info.GPUID}}</div>
+			<div class="GPUPersent">
+				<div class="lock-cover-container" v-bind:class="{ hidden: !info.throttled }"><i class="material-icons label" title="The clock speed of the GPU card could be throttled due to thermal or power limits.">report_problem</i></div>
+				<div class="inerCircle1" v-bind:style="utilizationStyle"></div>
+				<div class="inerCircle2" v-bind:style="styleobj"></div>
+				<div class="inerCircleCover"></div>
+				<div class="cover-text">{{info.Utilization}}%</div>
+			</div>
+			<div class="GPUInfo">
+				<div class="gpu-name">{{info.Name}}</div>
+				<div class="info-container"> <i class="material-icons label" title="Power">&#xE3E7;</i>
+					<div class="value-containe">{{info.Power}} W</div>
+				</div>
+				<div class="info-container"><i class="material-icons label" title="Temperature">&#xE80E;</i>
+					<div class="value-containe">{{info.Temperature}} °C</div>
+				</div>
+				<div class="info-container"><i class="material-icons label" title="Fan Speed">&#xE332;</i>
+					<div class="value-containe">{{info.Fan}} %    </div>
+				</div>
+				<div class="mem info-container"><i class="material-icons label" title="Memory Usage">memory</i>
+					<div class="membar-container value-containe" :title="freeMem"> 
+						<div class="membar" v-bind:style="memusageStyle"></div>
+						<div class="value-container mem-val">{{info.MemoryUsage}} %</div>
+					</div>
+				</div>
+			</div>
+			<div class="currentUserInfo">
+				<div class="appdata"><i class="material-icons label" title="current users">&#xE7FD;</i>
+					<div class="app-value">{{info.Users}}</div>
+				</div>
+				<div class="appdata"><i class="material-icons label" title="processes">&#xE8B8;</i>
+					<div class="app-value" v-bind:title="info.Processes">{{info.Processes}}</div>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="currentUserInfo">
-		<div class="appdata"><i class="material-icons label" title="current users">&#xE7FD;</i>
-			<div class="app-value">{{info.Users}}</div>
-		</div>
-		<div class="appdata"><i class="material-icons label" title="processes">&#xE8B8;</i>
-			<div class="app-value" v-bind:title="info.Processes">{{info.Processes}}</div>
-		</div>
-	</div>
-</div>
-</template>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
-<script>
-var levelColors = {'safe':'#8ac442','warning':'#f9bb0d','danger':'#fc1046'}
-var timeCutoff = 5 * 60 * 1000; // cutoff in millisecond
+	</template>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+	<script>
+		var levelColors = {'safe':'#8ac442','warning':'#f9bb0d','danger':'#fc1046'}
+		var timeCutoff = 5 * 60 * 1000; // cutoff in millisecond
 
-Vue.component("monitorctn",{
-	template:'#cardInfoContainer',
-	props: ["info"],
-	computed: {
-		styleobj: function() {
-			return {transform: "rotate("+ this.info.Utilization * 1.8+"deg)"};
-		},
-		memusageStyle: function(){
-			var color = this.setColor(this.info.MemoryUsage);
-			return {width: 150*0.01*this.info.MemoryUsage+"px",backgroundColor:color};
-		},
-		freeMem: function(){
-			return "Free Memory: "+this.info.MemoryFree+" MB"
-		},utilizationStyle(){
-			var color = this.setColor(this.info.Utilization);
-			return {backgroundColor:color}
-		},
-	},methods:{
-		setColor(percent){
-			var color;
-			if(percent>=90){
-				color = levelColors['danger'];
-			}else if(percent>=80){
-				color = levelColors['warning'];
-			}else{
-				color = levelColors['safe'];
-			}
-			return color;
-		}
-	}
-});
-var monitor = new Vue({
-	el: '#monitor',
-	data: {
-		infos:[]
-	},mounted: function(){
-		var vobj = this;
-		var gpufire = firebase.initializeApp(config);
-		var database = gpufire.database();
-		var ref = database.ref('Servers');
-		ref.on('value',(snapshot)=>{
-			vobj.infos = vobj.rearrageData(snapshot.val());
-		});
-	},methods:{
-		rearrageData(gpudata){
-				var keys = Object.keys(gpudata);
-				var infos = [];
-				var now = new Date(Date.now() - timeCutoff);
-				for(keyindex in keys){
-					var server = gpudata[keys[keyindex]].GPU;
-					var GPUs = server.map(function(e,gpuindex){
-						var logDate = new Date(e.logDateTime);
-						e.server = keys[keyindex];
-						e.index = gpuindex;
-						e.disconnect =( Math.abs(now - logDate) > timeCutoff)? true:false;
-						return e;
-					});
-					infos = infos.concat(GPUs);
+		Vue.component("monitorctn",{
+			template:'#cardInfoContainer',
+			props: ["info"],
+			computed: {
+				styleobj: function() {
+					return {transform: "rotate("+ this.info.Utilization * 1.8+"deg)"};
+				},
+				memusageStyle: function(){
+					var color = this.setColor(this.info.MemoryUsage);
+					return {width: 150*0.01*this.info.MemoryUsage+"px",backgroundColor:color};
+				},
+				freeMem: function(){
+					return "Free Memory: "+this.info.MemoryFree+" MB"
+				},utilizationStyle(){
+					var color = this.setColor(this.info.Utilization);
+					return {backgroundColor:color}
+				},
+			},methods:{
+				setColor(percent){
+					var color;
+					if(percent>=90){
+						color = levelColors['danger'];
+					}else if(percent>=80){
+						color = levelColors['warning'];
+					}else{
+						color = levelColors['safe'];
+					}
+					return color;
 				}
-			return infos;
-		}
-	}
-})
-</script>
+			}
+		});
+		var monitor = new Vue({
+			el: '#monitor',
+			data: {
+				infos:[]
+			},mounted: function(){
+				var vobj = this;
+				var gpufire = firebase.initializeApp(config);
+				var database = gpufire.database();
+				var ref = database.ref('Servers');
+				ref.on('value',(snapshot)=>{
+					vobj.infos = vobj.rearrageData(snapshot.val());
+				});
+			},methods:{
+				rearrageData(gpudata){
+						var keys = Object.keys(gpudata);
+						var infos = [];
+						var now = new Date(Date.now());
+						for(keyindex in keys){
+							var server = gpudata[keys[keyindex]].GPU;
+							var GPUs = Object.values(server)
+							.sort((GPU1,GPU2)=>{return (GPU1.GPUID>GPU2.GPUID)?1:-1;})
+							.map(function(e){
+								var logDate = new Date(e.logDateTime);
+								e.server = keys[keyindex];
+								e.disconnect =( Math.abs(now - logDate) > timeCutoff)? true:false;
+								return e;
+							});
+							infos = infos.concat(GPUs);
+						}
+					return infos;
+				}
+			}
+		})
+	</script>
 </html>

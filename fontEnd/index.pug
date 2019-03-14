@@ -13,7 +13,7 @@ html
     .cardInfoContainer
       .disconect-cover( v-bind:class="{ hidden: !info.disconnect }")
         i.material-icons.label(title="Disconnect") cloud_off
-      .title {{info.server}}:{{info.index}}
+      .title {{info.server}}:{{info.GPUID}}
       .GPUPersent
         .lock-cover-container(v-bind:class="{ hidden: !info.throttled }")
           i.material-icons.label(title="The clock speed of the GPU card could be throttled due to thermal or power limits.") lock
