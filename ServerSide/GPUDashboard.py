@@ -3,6 +3,7 @@ import time,re
 import json
 import __future__
 import requests
+import six
 from datetime import datetime 
 
 nvmlClocksThrottleReasonUserDefinedClocks         = 0x0000000000000002
@@ -21,8 +22,9 @@ throttleByThermalOrPowerBrakeSlowdown = nvmlClocksThrottleReasonHwSlowdown | \
                                          nvmlClocksThrottleReasonHwPowerBrakeSlowdown| \
                                          nvmlClocksThrottleReasonHwThermalSlowdown
 def getGPUInfo():
-    propertyNames = ['power.draw','utilization.gpu','fan.speed','temperature.gpu','name','index','memory.total','memory.used','throttled','uuid']
-    GPUInfoTEXT = sp.check_output('nvidia-smi  --format=csv,noheader --query-gpu=power.draw,utilization.gpu,fan.speed,temperature.gpu,name,index,memory.total,memory.used,clocks_throttle_reasons.active,uuid',shell=True).decode()
+    propertyNames = ['power.draw','utilization.gpu','fan.speed','temperature.gpu','name','index',
+                     'memory.total','memory.used','throttled', 'clocks.gr', 'uuid']
+    GPUInfoTEXT = sp.check_output('nvidia-smi  --format=csv,noheader --query-gpu=power.draw,utilization.gpu,fan.speed,temperature.gpu,name,index,memory.total,memory.used,clocks_throttle_reasons.active,clocks.gr,uuid',shell=True).decode()
     GPUInfos = {}
     for info in GPUInfoTEXT.split('\n'):
         if info:
@@ -82,6 +84,7 @@ class GPU(object):
         self.memoryUsed = info['memory.used']
         self.utilization = info['utilization.gpu']
         self.throttled = info['throttled']
+        self.clockSpeed = info['clocks.gr']
     def updateTasks(self,tasks):
         self._tasks = tasks
     def _clearTask(self):
@@ -147,10 +150,19 @@ class GPU(object):
         return self._temperature
     @temperature.setter
     def temperature(self,value):
-        if isinstance(value,str):
+        if isinstance(value,six.string_types):
             self._temperature = float(value)
         else:
             self._temperature = value
+    @property
+    def clockSpeed(self):
+        return self._clockSpeed
+    @clockSpeed.setter
+    def clockSpeed(self,value):
+        if isinstance(value,six.string_types):
+            self._clockSpeed = float(value.split()[0])
+        else:
+            self._clockSpeed = value
     def memoryValueHandler(self,value):
         processedValue = None
         if isinstance(value,int) or isinstance(value,float):
@@ -232,7 +244,7 @@ class GPUDashboard(object):
             out[gpu.uuid[-17:]] = {'Fan':fanSpeed,'GPUID':gpu.index,'Name':gpu.name,
               'Power':gpu.powerDraw,'Processes':processes,'Temperature':gpu.temperature,
               'Users':users,'Utilization':gpu.utilization,'MemoryUsage':memoryUsage,
-              'MemoryFree':memoryFree,'throttled':gpu.throttled,
+              'MemoryFree':memoryFree,'throttled':gpu.throttled,'Clock':gpu.clockSpeed,
               'logDateTime':logDateTime }
         return out
         
