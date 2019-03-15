@@ -26,7 +26,9 @@ Vue.component("monitorctn",{
     },utilizationStyle(){
       var color = this.setColor(this.info.Utilization);
       return {backgroundColor:color}
-    },
+    },clockspeed(){
+      return "Current clock speed: "+this.info.Clock+" MHz"
+    }
   },methods:{
     setColor(percent){
       var color;

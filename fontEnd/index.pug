@@ -12,7 +12,7 @@ html
   template#cardInfoContainer
     .cardInfoContainer
       .disconect-cover( v-bind:class="{ hidden: !info.disconnect }")
-        i.material-icons.label(title="Disconnect") cloud_off
+        i.material-icons.label(title="Disconnect") link_off
       .title {{info.server}}:{{info.GPUID}}
       .GPUPersent
         .lock-cover-container(v-bind:class="{ hidden: !info.throttled }")
@@ -20,7 +20,7 @@ html
         .inerCircle1( v-bind:style="utilizationStyle")
         .inerCircle2( v-bind:style="styleobj")
         .inerCircleCover
-        .cover-text {{info.Utilization}}%
+        .cover-text(:title='clockspeed') {{info.Utilization}}%
       .GPUInfo
         .gpu-name {{info.Name}}
         div.info-container 

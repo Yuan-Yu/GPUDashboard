@@ -24,14 +24,14 @@
 	</body>
 	<template id="cardInfoContainer">
 		<div class="cardInfoContainer">
-			<div class="disconect-cover" v-bind:class="{ hidden: !info.disconnect }"><i class="material-icons label" title="Disconnect">cloud_off</i></div>
+			<div class="disconect-cover" v-bind:class="{ hidden: !info.disconnect }"><i class="material-icons label" title="Disconnect">link_off</i></div>
 			<div class="title">{{info.server}}:{{info.GPUID}}</div>
 			<div class="GPUPersent">
 				<div class="lock-cover-container" v-bind:class="{ hidden: !info.throttled }"><i class="material-icons label" title="The clock speed of the GPU card could be throttled due to thermal or power limits.">report_problem</i></div>
 				<div class="inerCircle1" v-bind:style="utilizationStyle"></div>
 				<div class="inerCircle2" v-bind:style="styleobj"></div>
 				<div class="inerCircleCover"></div>
-				<div class="cover-text">{{info.Utilization}}%</div>
+				<div class="cover-text" :title="clockspeed">{{info.Utilization}}%</div>
 			</div>
 			<div class="GPUInfo">
 				<div class="gpu-name">{{info.Name}}</div>
@@ -84,7 +84,9 @@
 				},utilizationStyle(){
 					var color = this.setColor(this.info.Utilization);
 					return {backgroundColor:color}
-				},
+				},clockspeed(){
+					return "Current clock speed: "+this.info.Clock+" MHz"
+				}
 			},methods:{
 				setColor(percent){
 					var color;
