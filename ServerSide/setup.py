@@ -25,7 +25,7 @@ with open(path.join('.', 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='GPUDashboard',  # Required
-    version='0.2.7',  # Required
+    version='0.2.8',  # Required
 
     # This is a one-line description or tagline of what your project does. This
     # corresponds to the "Summary" metadata field:
