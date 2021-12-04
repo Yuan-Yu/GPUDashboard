@@ -34,7 +34,7 @@
 				<div class="cover-text" :title="clockspeed">{{info.Utilization}}%</div>
 			</div>
 			<div class="GPUInfo">
-				<div class="gpu-name">{{info.Name}}</div>
+				<div class="gpu-name">{{reformatGPUName(info.Name)}}</div>
 				<div class="info-container"> <i class="material-icons label" title="Power">&#xE3E7;</i>
 					<div class="value-containe">{{info.Power}} W</div>
 				</div>
@@ -67,7 +67,11 @@
 	<script>
 		var levelColors = {'safe':'#8ac442','warning':'#f9bb0d','danger':'#fc1046'}
 		var timeCutoff = 5 * 60 * 1000; // cutoff in millisecond
-
+		Vue.mixin({
+		  methods: {
+			reformatGPUName: str => str.split(' ').slice(-4).join(' ')
+		  }
+		})
 		Vue.component("monitorctn",{
 			template:'#cardInfoContainer',
 			props: ["info"],

@@ -22,7 +22,7 @@ html
         .inerCircleCover
         .cover-text(:title='clockspeed') {{info.Utilization}}%
       .GPUInfo
-        .gpu-name {{info.Name}}
+        .gpu-name {{reformatGPUName(info.Name)}}
         div.info-container 
           i.material-icons.label(title="Power") &#xE3E7;
           .value-containe {{info.Power}} W

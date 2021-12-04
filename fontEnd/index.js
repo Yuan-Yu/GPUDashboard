@@ -9,7 +9,11 @@ var config = {
     
 var levelColors = {'safe':'#8ac442','warning':'#f9bb0d','danger':'#fc1046'}
 var timeCutoff = 5 * 60 * 1000; // cutoff in millisecond
-
+Vue.mixin({
+  methods: {
+  reformatGPUName: str => str.split(' ').slice(-4).join(' ')
+  }
+})
 Vue.component("monitorctn",{
   template:'#cardInfoContainer',
   props: ["info"],
