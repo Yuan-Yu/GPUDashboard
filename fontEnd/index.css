@@ -203,6 +203,7 @@ i.label {
   line-height: 20px;
   display: inline-block;
   vertical-align: middle;
+  white-space: nowrap;
 }
 
 .hidden {
