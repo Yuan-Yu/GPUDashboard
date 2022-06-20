@@ -65,9 +65,13 @@
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
     <script>
-      var levelColors = {'safe':'#8ac442','warning':'#f9bb0d','danger':'#fc1046'}
+      var levelColors = {'safe':'#8ac442','warning':'#f9bb0d','danger':'#fc1046'};
       var timeCutoff = 5 * 60 * 1000; // cutoff in millisecond
-
+	  Vue.mixin({
+	    methods: {
+			reformatGPUName: str => str.replace(/NVIDIA\s+/,'')
+	    }
+	  })
       Vue.component("monitorctn",{
         template:'#cardInfoContainer',
         props: ["info"],

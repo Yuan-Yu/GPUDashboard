@@ -69,7 +69,7 @@
 		var timeCutoff = 5 * 60 * 1000; // cutoff in millisecond
 		Vue.mixin({
 		  methods: {
-			reformatGPUName: str => str.split(' ').slice(-4).join(' ')
+		  reformatGPUName: str => str.replace(/NVIDIA\s+/,'')
 		  }
 		})
 		Vue.component("monitorctn",{
